@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudGuard Academy - Workflow Diagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Workflow Diagram Styles */
+        .workflow {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        /* Arrow between steps */
+        .arrow {
+            text-align: center;
+            color: #667eea;
+            font-size: 2rem;
+            margin: -1rem 0;
+        }
+
+        /* Lab Cards Section */
+        .labs-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .labs-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .labs-workflow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .lab-workflow-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .lab-workflow-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .lab-workflow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .lab-step {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Data Flow Diagram */
+        .dataflow-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .dataflow-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .dataflow-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .dataflow-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dataflow-box h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .dataflow-arrow {
+            color: #667eea;
+            font-size: 1.5rem;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .dataflow-arrow {
+                display: block;
+            }
+        }
+
+        /* Security Features */
+        .security-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .security-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .security-card {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .security-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .security-card h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+            color: #666;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .workflow-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .dataflow-diagram {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ CloudGuard Academy Workflow</h1>
+        <p class="subtitle">Complete user journey and system architecture</p>
+
+        <!-- Main Workflow -->
+        <div class="workflow">
+            <!-- Step 1 -->
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-icon">👤</div>
+                <div class="step-content">
+                    <h3>User Registration</h3>
+                    <p>New users create an account by entering email and password. Password is hashed with bcryptjs for security.</p>
+                </div>
+            </div>
+
+            <div class="arrow">⬇️</div>
+
+            <!-- Step 2 -->
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-icon">🔑</div>
+                <div class="step-content">
+                    <h3>JWT Authentication</h3>
+                    <p>System generates a JWT token (valid for 24 hours) that authenticates user requests and maintains secure sessions.</p>
+                </div>
+            </div>
+
+            <div class="arrow">⬇️</div>
+
+            <!-- Step 3 -->
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-icon">📊</div>
+                <div class="step-content">
+                    <h3>Dashboard Access</h3>
+                    <p>User lands on dashboard showing available labs, total points, completed labs, and current ranking on leaderboard.</p>
+                </div>
+            </div>
+
+            <div class="arrow">⬇️</div>
+
+            <!-- Step 4 -->
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-icon">🎯</div>
+                <div class="step-content">
+                    <h3>Choose Lab</h3>
+                    <p>User selects a security lab to learn from: SQL Injection, XSS, CSRF, or IDOR. Each lab has two modes: Vulnerable & Secure.</p>
+                </div>
+            </div>
+
+            <div class="arrow">⬇️</div>
+
+            <!-- Step 5 -->
+            <div class="workflow-step">
+                <div class="step-number">5</div>
+                <div class="step-icon">💻</div>
+                <div class="step-content">
+                    <h3>Practice & Learn</h3>
+                    <p>In Vulnerable mode, users exploit the vulnerability. In Secure mode, they see how to fix it. Side-by-side code comparison included.</p>
+                </div>
+            </div>
+
+            <div class="arrow">⬇️</div>
+
+            <!-- Step 6 -->
+            <div class="workflow-step">
+                <div class="step-number">6</div>
+                <div class="step-icon">🚩</div>
+                <div class="step-content">
+                    <h3>Submit Flag</h3>
+                    <p>Upon successful exploitation, user receives a flag. They submit it to verify their exploit and earn points.</p>
+                </div>
+            </div>
+
+            <div class="arrow">⬇️</div>
+
+            <!-- Step 7 -->
+            <div class="workflow-step">
+                <div class="step-number">7</div>
+                <div class="step-icon">⭐</div>
+                <div class="step-content">
+                    <h3>Earn Points & Rank</h3>
+                    <p>System validates the flag and awards points (100-150 per lab). User's ranking updates in real-time on the leaderboard.</p>
+                </div>
+            </div>
+
+            <div class="arrow">⬇️</div>
+
+            <!-- Step 8 -->
+            <div class="workflow-step">
+                <div class="step-number">8</div>
+                <div class="step-icon">🏆</div>
+                <div class="step-content">
+                    <h3>Check Leaderboard</h3>
+                    <p>View global rankings and compete with other security learners. Track progress and strive to complete all 450 points.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Labs Workflow Section -->
+        <div class="labs-section">
+            <h2>🔬 Individual Lab Workflows</h2>
+            <div class="labs-workflow">
+                <!-- SQLi Lab -->
+                <div class="lab-workflow-card">
+                    <h4>🔐 SQL Injection Lab</h4>
+                    <div class="lab-workflow-steps">
+                        <div class="lab-step">1️⃣ Read vulnerability explanation</div>
+                        <div class="lab-step">2️⃣ Try vulnerable login form</div>
+                        <div class="lab-step">3️⃣ Bypass with: <code>' OR '1'='1</code></div>
+                        <div class="lab-step">4️⃣ Review secure parameterized query</div>
+                        <div class="lab-step">5️⃣ Submit flag: <code>FLAG{SQL_INJECTION_MASTER}</code></div>
+                        <div class="lab-step">✅ Earn 100 points</div>
+                    </div>
+                </div>
+
+                <!-- XSS Lab -->
+                <div class="lab-workflow-card">
+                    <h4>🎯 XSS Lab</h4>
+                    <div class="lab-workflow-steps">
+                        <div class="lab-step">1️⃣ Understand XSS vectors</div>
+                        <div class="lab-step">2️⃣ Try vulnerable forum post</div>
+                        <div class="lab-step">3️⃣ Inject: <code>&lt;img onerror="alert('XSS')"&gt;</code></div>
+                        <div class="lab-step">4️⃣ Compare with HTML entity encoding</div>
+                        <div class="lab-step">5️⃣ Submit flag: <code>FLAG{XSS_SCRIPT_INJECTOR}</code></div>
+                        <div class="lab-step">✅ Earn 100 points</div>
+                    </div>
+                </div>
+
+                <!-- CSRF Lab -->
+                <div class="lab-workflow-card">
+                    <h4>⚔️ CSRF Lab</h4>
+                    <div class="lab-workflow-steps">
+                        <div class="lab-step">1️⃣ Learn CSRF attack vectors</div>
+                        <div class="lab-step">2️⃣ Vulnerable: No token validation</div>
+                        <div class="lab-step">3️⃣ Transfer funds without token</div>
+                        <div class="lab-step">4️⃣ Review token-based protection</div>
+                        <div class="lab-step">5️⃣ Submit flag: <code>FLAG{CSRF_FORGED_REQUEST}</code></div>
+                        <div class="lab-step">✅ Earn 100 points</div>
+                    </div>
+                </div>
+
+                <!-- IDOR Lab -->
+                <div class="lab-workflow-card">
+                    <h4>🔓 IDOR Lab</h4>
+                    <div class="lab-workflow-steps">
+                        <div class="lab-step">1️⃣ Understand object reference</div>
+                        <div class="lab-step">2️⃣ Access DOC-001 (your document)</div>
+                        <div class="lab-step">3️⃣ Change to DOC-002 (other user)</div>
+                        <div class="lab-step">4️⃣ Review authorization checks</div>
+                        <div class="lab-step">5️⃣ Submit flag: <code>FLAG{IDOR_ACCESS_VIOLATION}</code></div>
+                        <div class="lab-step">✅ Earn 150 points</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Flow Diagram -->
+        <div class="dataflow-section">
+            <h2>🔄 System Data Flow</h2>
+            <div class="dataflow-diagram">
+                <div class="dataflow-box">
+                    <h4>👥 Frontend</h4>
+                    <p>React App</p>
+                    <p>Port 5173</p>
+                </div>
+
+                <div class="dataflow-arrow">⇄</div>
+
+                <div class="dataflow-box">
+                    <h4>🖥️ Backend API</h4>
+                    <p>Express.js</p>
+                    <p>Port 5000</p>
+                </div>
+
+                <div class="dataflow-arrow">⇄</div>
+
+                <div class="dataflow-box">
+                    <h4>💾 Database</h4>
+                    <p>SQLite</p>
+                    <p>dev.db</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Features -->
+        <div class="security-section">
+            <h2>🔐 Security Workflow</h2>
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="security-card-icon">🔑</div>
+                    <h4>JWT Tokens</h4>
+                    <p>Secure token-based authentication with 24-hour expiration</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-icon">🔒</div>
+                    <h4>Password Hashing</h4>
+                    <p>bcryptjs with 10 salt rounds for secure password storage</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-icon">🚫</div>
+                    <h4>CORS Protection</h4>
+                    <p>Cross-Origin requests restricted to authorized domains</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-icon">⏱️</div>
+                    <h4>Rate Limiting</h4>
+                    <p>100 requests per 15 minutes per IP to prevent abuse</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-icon">✔️</div>
+                    <h4>Input Validation</h4>
+                    <p>All user inputs validated server-side before processing</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-card-icon">🛡️</div>
+                    <h4>Helmet Headers</h4>
+                    <p>HTTP security headers prevent common attacks</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>CloudGuard Academy Workflow | 
+               <a href="https://github.com/sinanzayn6677-cmyk/cloudguard-academy" target="_blank">GitHub Repository</a> | 
+               <a href="http://localhost:5173" target="_blank">Launch App</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">© 2024 CloudGuard Academy. Educational use only.</p>
+        </div>
+    </div>
+</body>
+</html>
